@@ -14,3 +14,4 @@ console.log(age);
 
 list.push("naruto")
 console.log(list);
+console.log("hola");

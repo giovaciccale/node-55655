@@ -1,55 +1,55 @@
 class UserManager {
-    static #users = [];
+  static #users = [];
 
-    constructor(data){
-        this.id= 
-        UserManager.#users.length === 0
-        ? 1
-        : UserManager.#users[UserManager.#users.length - 1].id + 1; // Estamos usando operador Ternario
-        this.name = data.name;
-        this.photo = data.photo;
-        this.email = data.email;
-
-        UserManager.#users.push(this)
-    }
-    create(data){
+  constructor() {}
+  create(data) {
+    try {
+      if (!data.name || !data.photo || !data.email) {
+        throw new Error("Name, photo, email are require");
+      } else {
         const user = {
-            id: 
-            UserManager.#users.length === 0
-            ? 1
-            : UserManager.#users[UserManager.#users.length - 1].id + 1, // Estamos usando operador Ternario
-            name: data.name,
-            photo: data.photo,
-            email: data.email,
-
-        }  
-        UserManager.#users.push(user);           
-        //  console.log(UserManager.#users);        
-    }
-    read() {
-        return UserManager.#users;
+          id: this.getID(),
+          name: data.name,
+          photo: data.photo,
+          email: data.email,
+        };
+        UserManager.#users.push(user);
+        return user;
       }
-    readOne(id){
-        return UserManager.#users.find((each) => each.id === Number(id));
+    } catch (error) {
+      return error.message;
     }
+  }
+  read() {
+    return UserManager.#users;
+  }
+  readOne(id) {
+    try {
+      const user = UserManager.#users.find((each) => each.id === Number(id));
+      if (!user) {
+        throw new Error("No existe User con el ID " + id );
+      } else {
+        return UserManager.#users.find((each) => each.id === Number(id));
+      }
+    } catch (error) {
+      return error.message;
+    }
+  }
+  getID() {
+    return UserManager.#users.length === 0
+      ? 1
+      : UserManager.#users[UserManager.#users.length - 1].id + 1; // Estamos usando operador Ternario
+  }
 }
 
-const Users = new UserManager({
+const Users = new UserManager();
 
-    name: "Giovanni",
-    photo: "URL",
-    email: "prueba@hotmail.com",
-
-
+User1 = Users.create({
+  name: "Nicolas",
+  photo: "URL",
+  email: "prueba2@hotmail.com",
 });
 
-Users.create({
-
-    name: "Nicolas",
-    photo: "URL",
-    email: "prueba2@hotmail.com",
-
-  });
-
 // console.log(Users.read());
-// console.log(Users.readOne(2));
+console.log(Users.readOne(4));
+// console.log(User1)

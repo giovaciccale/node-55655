@@ -1,55 +1,57 @@
-class UserManager {
-  static #users = [];
+class ProductManager {
+    static #products = [];
 
-  constructor() {}
-  create(data) {
-    try {
-      if (!data.name || !data.photo || !data.email) {
-        throw new Error("Name, photo, email are require");
-      } else {
-        const user = {
-          id: this.getID(),
-          name: data.name,
-          photo: data.photo,
-          email: data.email,
-        };
-        UserManager.#users.push(user);
-        return user;
-      }
-    } catch (error) {
-      return error.message;
+    constructor(data){
+        this.id= 
+        ProductManager.#products.length === 0
+        ? 1
+        : ProductManager.#products[ProductManager.#products.length - 1].id + 1; // Estamos usando operador Ternario
+        this.title = data.title;
+        this.photo = data.photo;
+        this.price = data.price;
+        this.stock = data.stock;
+        ProductManager.#products.push(this)
     }
-  }
-  read() {
-    return UserManager.#users;
-  }
-  readOne(id) {
-    try {
-      const user = UserManager.#users.find((each) => each.id === Number(id));
-      if (!user) {
-        throw new Error("No existe User con el ID " + id );
-      } else {
-        return UserManager.#users.find((each) => each.id === Number(id));
-      }
-    } catch (error) {
-      return error.message;
+
+    create(data){
+        const product = {
+            id: 
+            ProductManager.#products.length === 0
+            ? 1
+            : ProductManager.#products[ProductManager.#products.length - 1].id + 1, // Estamos usando operador Ternario
+            title: data.title,
+            photo: data.photo,
+            price: data.price,
+            stock: data.stock,
+        }  
+         ProductManager.#products.push(product);           
+        //  console.log(ProductManager.#products);        
     }
-  }
-  getID() {
-    return UserManager.#users.length === 0
-      ? 1
-      : UserManager.#users[UserManager.#users.length - 1].id + 1; // Estamos usando operador Ternario
-  }
+    read() {
+        return ProductManager.#products;
+      }
+    readOne(id){
+        return ProductManager.#products.find((each) => each.id === Number(id));
+    }
 }
 
-const Users = new UserManager();
+const Products = new ProductManager({
 
-User1 = Users.create({
-  name: "Nicolas",
-  photo: "URL",
-  email: "prueba2@hotmail.com",
+    title: "Auto",
+    photo: "URL",
+    price: 10,
+    stock: 10,
+
 });
 
-// console.log(Users.read());
-console.log(Users.readOne(4));
-// console.log(User1)
+Products.create({
+
+    title: "Bicicleta",
+    photo: "URL",
+    price: 15000,
+    stock: 20,
+
+  });
+
+console.log(Products.read());
+console.log(Products.readOne(1));

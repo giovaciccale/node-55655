@@ -53,5 +53,5 @@ Products.create({
 
   });
 
-// console.log(Products.read());
-// console.log(Products.readOne(1));
+console.log(Products.read());
+console.log(Products.readOne(1));

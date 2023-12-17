@@ -1,55 +1,57 @@
-class UserManager {
-    static #users = [];
+class ProductManager {
+    static #products = [];
 
     constructor(data){
         this.id= 
-        UserManager.#users.length === 0
+        ProductManager.#products.length === 0
         ? 1
-        : UserManager.#users[UserManager.#users.length - 1].id + 1; // Estamos usando operador Ternario
-        this.name = data.name;
+        : ProductManager.#products[ProductManager.#products.length - 1].id + 1; // Estamos usando operador Ternario
+        this.title = data.title;
         this.photo = data.photo;
-        this.email = data.email;
-
-        UserManager.#users.push(this)
+        this.price = data.price;
+        this.stock = data.stock;
+        ProductManager.#products.push(this)
     }
-    create(data){
-        const user = {
-            id: 
-            UserManager.#users.length === 0
-            ? 1
-            : UserManager.#users[UserManager.#users.length - 1].id + 1, // Estamos usando operador Ternario
-            name: data.name,
-            photo: data.photo,
-            email: data.email,
 
+    create(data){
+        const product = {
+            id: 
+            ProductManager.#products.length === 0
+            ? 1
+            : ProductManager.#products[ProductManager.#products.length - 1].id + 1, // Estamos usando operador Ternario
+            title: data.title,
+            photo: data.photo,
+            price: data.price,
+            stock: data.stock,
         }  
-        UserManager.#users.push(user);           
-        //  console.log(UserManager.#users);        
+         ProductManager.#products.push(product);           
+        //  console.log(ProductManager.#products);        
     }
     read() {
-        return UserManager.#users;
+        return ProductManager.#products;
       }
     readOne(id){
-        return UserManager.#users.find((each) => each.id === Number(id));
+        return ProductManager.#products.find((each) => each.id === Number(id));
     }
 }
 
-const Users = new UserManager({
+const Products = new ProductManager({
 
-    name: "Giovanni",
+    title: "Auto",
     photo: "URL",
-    email: "prueba@hotmail.com",
-
+    price: 10,
+    stock: 10,
 
 });
 
-Users.create({
+Products.create({
 
-    name: "Nicolas",
+    title: "Bicicleta",
     photo: "URL",
-    email: "prueba2@hotmail.com",
+    price: 15000,
+    stock: 20,
 
   });
 
-// console.log(Users.read());
-// console.log(Users.readOne(2));
+console.log(Products.read());
+console.log(Products.readOne(1));

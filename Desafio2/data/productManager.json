@@ -1,0 +1,20 @@
+[
+  {
+    "name": "Arturo",
+    "photo": "URL",
+    "email": "prueba1@hotmail.com",
+    "id": 1
+  },
+  {
+    "name": "Juan",
+    "photo": "URL",
+    "email": "prueba2@hotmail.com",
+    "id": 2
+  },
+  {
+    "name": "Pedro",
+    "photo": "URL",
+    "email": "prueba3@hotmail.com",
+    "id": 3
+  }
+]

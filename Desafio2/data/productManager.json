@@ -1,20 +1,23 @@
 [
   {
-    "name": "Arturo",
+    "title": "Bicicleta",
     "photo": "URL",
-    "email": "prueba1@hotmail.com",
+    "price": 15000,
+    "stock": 20,
     "id": 1
   },
   {
-    "name": "Juan",
+    "title": "Moto",
     "photo": "URL",
-    "email": "prueba2@hotmail.com",
+    "price": 700,
+    "stock": 10,
     "id": 2
   },
   {
-    "name": "Pedro",
+    "title": "Triciclo",
     "photo": "URL",
-    "email": "prueba3@hotmail.com",
+    "price": 20,
+    "stock": 1,
     "id": 3
   }
 ]

@@ -1,3 +1,4 @@
+const { error } = require("console");
 const fs = require("fs");
 
 class ProductManager {
@@ -6,12 +7,9 @@ class ProductManager {
     this.productos = [];
   }
 
-  
-
   saveProducts() {
     const jsonData = JSON.stringify(this.productos, null, 2);
     fs.writeFileSync(this.ruta, jsonData);
-
   }
 
   create(producto) {
@@ -27,23 +25,33 @@ class ProductManager {
     try {
       const resultado = await fs.promises.readFile(this.ruta, "utf-8");
       this.productos = JSON.parse(resultado);
+      
     } catch (error) {
       console.log("Error al leer el archivo");
     }
   }
 
-
   read() {
+    
     console.log(this.productos);
   }
 
-  readOne(id) {
+readOne(id) {
+  try {
     const producto = this.productos.find((p) => p.id === id);
-    console.log(producto);
+
+    if (!producto) {
+      throw new Error("Don't exist ID");
+    } else {
+      console.log(producto);
+    }
+  } catch (error) {
+    console.log(error.message); // Muestra el mensaje de error en la consola
   }
 }
 
-
+  
+}
 
 // Uso de la clase ProductManager
 const productManager = new ProductManager();
@@ -68,10 +76,11 @@ const productos = [
   },
 ];
 
-productManager.loadProducts();
 productManager.create(productos[0]);
 productManager.create(productos[1]);
 productManager.create(productos[2]);
+productManager.loadProducts();
 productManager.read();
 productManager.readOne(3);
+productManager.readOne(4);
 

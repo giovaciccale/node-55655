@@ -6,12 +6,9 @@ class ProductManager {
     this.productos = [];
   }
 
-  
-
   saveProducts() {
     const jsonData = JSON.stringify(this.productos, null, 2);
     fs.writeFileSync(this.ruta, jsonData);
-
   }
 
   create(producto) {
@@ -23,27 +20,28 @@ class ProductManager {
     console.log("Producto creado con éxito");
   }
 
-  async loadProducts() {
+  loadProducts() {
     try {
-      const resultado = await fs.promises.readFile(this.ruta, "utf-8");
+      const resultado = fs.readFileSync(this.ruta, "utf-8");
       this.productos = JSON.parse(resultado);
+      console.log(this.productos);
     } catch (error) {
-      console.log("Error al leer el archivo");
+      console.log("No hay productos creados");
     }
   }
 
-
-  read() {
-    console.log(this.productos);
-  }
-
   readOne(id) {
-    const producto = this.productos.find((p) => p.id === id);
-    console.log(producto);
+    try {
+      const producto = this.productos.find((p) => p.id === id);
+      if (!producto) {
+        throw new Error("Don't exist product with ID" + id);
+      } else console.log(producto);
+    } catch (error) {
+      console.log(error.message);
+      return error.message;
+    }
   }
 }
-
-
 
 // Uso de la clase ProductManager
 const productManager = new ProductManager();
@@ -69,9 +67,8 @@ const productos = [
 ];
 
 productManager.loadProducts();
-productManager.create(productos[0]);
-productManager.create(productos[1]);
-productManager.create(productos[2]);
-productManager.read();
-productManager.readOne(3);
+// productManager.create(productos[0]);
+// productManager.create(productos[1]);
+// productManager.create(productos[2]);
 
+productManager.readOne(3);
